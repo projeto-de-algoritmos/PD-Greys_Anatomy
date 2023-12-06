@@ -1,221 +1,181 @@
 import React, { useState } from 'react';
 import './style/dashboard.css';
 import med from './assets/blue_medical.mp4';
-// Ordenacao com heap, do intervalo que termina primeiro ate o que termina por ultimo:
-function swap(x, y, heap) {
-  const heapSwap = heap;
-  const temp = heapSwap[x];
-  heapSwap[x] = heapSwap[y];
-  heapSwap[y] = temp;
-  return heapSwap;
-}
-
-function shiftUp(indice, heap) {
-  let ind = indice;
-  let indPaiAtual = parseInt((ind - 1) / 2);
-  let PaiAtual = heap[indPaiAtual].end;
-  let atual = heap[ind].end;
-
-  while (ind > 0 && atual < PaiAtual) {
-    heap = swap(ind, indPaiAtual, heap);
-    ind = indPaiAtual;
-    indPaiAtual = parseInt((ind - 1) / 2);
-    PaiAtual = heap[indPaiAtual].end;
-    atual = heap[ind].end;
-  }
-}
-
-function pegaMenor(heap) {
-  const menor = heap[0];
-  const ultimo = heap.length - 1;
-  heap[0] = heap[ultimo];
-  heap.pop();
-  heapify(0, heap);
-  return menor;
-}
-
-function heapify(indice, heap) {
-  const indEsq = parseInt(2 * indice + 1);
-  const indDir = parseInt(2 * indice + 2);
-  let numMenor = indice;
-
-  if (indEsq < heap.length && heap[indEsq].end < heap[numMenor].end) {
-    numMenor = indEsq;
-  }
-
-  if (indDir < heap.length && heap[indDir].end < heap[numMenor].end) {
-    numMenor = indDir;
-  }
-
-  if (numMenor !== indice) {
-    heap = swap(indice, numMenor, heap);
-    heapify(numMenor, heap);
-  }
-}
-
-const heap = [];
-const heapResultado = [];
-
-function ordenaHeap(intervals) {
-  let tempoFinalMenor = 0;
-
-  for (const intervalo of intervals) {
-    heap.push(intervalo);
-    shiftUp(heap.length - 1, heap);
-  }
-
-  while (heap.length > 0) {
-    tempoFinalMenor = pegaMenor(heap);
-    heapResultado.push(tempoFinalMenor);
-    heapify(0, heap);
-  }
-}
-
-const M = [];
-
-function intervalScheduling(intervals) {
-  ordenaHeap(intervals);
-
-  const n = intervals.length;
-
-  M[0] = 0;
-  for (let i = 1; i <= n; i++) {
-    M[i] = 0;
-  }
-
-  for (let j = 1; j <= n; j++) {
-    m_compute_opt(j);
-  }
-
-  return M;
-}
-
-function p(j, indiceHeap, heapResultado) {
-  let intervalAtual = heapResultado[indiceHeap];
-  let valorP;
-
-  for (let i = indiceHeap - 1; i >= 0; i--) {
-    const intervalCompativel = heapResultado[i];
-    if (intervalAtual.start >= intervalCompativel.end) {
-      valorP = M[i + 1]; 
-      return valorP;
-    }
-  }
-
-  return 0;
-}
-
-function m_compute_opt(j) {
-  let indiceHeap = j - 1;
-  if (indiceHeap === 0) {
-    M[j] = heapResultado[indiceHeap].weight;
-  }
-  if (M[j] === 0) {
-    let resultP = p(j, indiceHeap, heapResultado);
-    const opt1 = heapResultado[indiceHeap].weight + resultP;
-    const opt2 = M[j - 1];
-    M[j] = Math.max(opt1, opt2);
-  }
-  return M[j];
-}
-
-let indiceProxCompat;
-let tarefasPegadas = [];
-
-function find_Solution(j) {
-  let indiceHeap = j - 1;
-
-  if (j === 0) {
-    return;
-  }
-  if (M[j] > M[j - 1]) {
-    let resultP = p(j, indiceHeap, heapResultado);
-    indiceProxCompat = M.indexOf(resultP);
-    tarefasPegadas.push(heapResultado[indiceHeap]); // Usando push para adicionar ao final do array
-    console.log(`Task ${intervals.indexOf(heapResultado[indiceHeap]) + 1} selected`);
-    return find_Solution(indiceProxCompat);
-  }
-
-  return;
-}
-
-const intervals = [
-  { start: 1, end: 4, weight: 15 },
-  { start: 3, end: 5, weight: 20 },
-  { start: 0, end: 6, weight: 25 },
-  { start: 4, end: 7, weight: 30 },
-  { start: 3, end: 8, weight: 35 },
-  { start: 5, end: 9, weight: 40 },
-  { start: 6, end: 10, weight: 45 },
-  { start: 8, end: 11, weight: 50 },
-];
-
-intervalScheduling(intervals);
-find_Solution(intervals.length);
-console.log(intervalScheduling(intervals));
-console.log("Maximum Weight:", M[intervals.length]);
-console.log("Selected Tasks:");
-
-// const selectedIntervals = tarefasPegadas.map(task => ({
-//   start: task.start,
-//   end: task.end
-// }));
-// console.log(selectedIntervals, "teste");
-console.log(tarefasPegadas, "testando");
- 
+import { intervalScheduling, find_Solution, tarefasPegadas} from './TaskList';
 
 const Dashboard = () => {
+  const [userIntervals, setUserIntervals] = useState([]);
+  const [selectedTasks, setSelectedTasks] = useState([]);
+  const [medicoName, setMedicoName] = useState('');
+  const [patientName, setPatientName] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const start = parseInt(e.target.elements.start.value);
+    const end = parseInt(e.target.elements.end.value);
+    const weight = parseInt(e.target.elements.weight.value);
+
+    if (!isNaN(start) && !isNaN(end) && !isNaN(weight)) {
+      const newInterval = {
+        start,
+        end,
+        weight,
+        medico: medicoName,
+        paciente: patientName,
+
+      };
+
+      setUserIntervals((prevIntervals) => [...prevIntervals, newInterval]);
+
+      e.target.reset();
+
+    } else {
+      console.error('Por favor, preencha todos os campos do formulário corretamente.');
+    }
+  };
+  const runAlgorithm = () => {
+
+    intervalScheduling(userIntervals);
+    find_Solution(userIntervals.length);
+
+    setSelectedTasks([...tarefasPegadas]);
+  };
 
   return (
     <div className="container">
-          <h1>Algum Título</h1>
-          <div className="videoTag">
-            <video autoPlay loop muted>
-              <source src={med} type='video/mp4' />
-            </video>
-            <div className="aplication-1">
-              <h2>Agendamento</h2>
-                <div className='options'>
-                  <label htmlFor="petName">Médico Responsável:</label>
-                  <input
-                    className='form-field'
-                    type="text"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="startTime">Nome do paciente:</label>
-                  <input
-                    className='form-field'
-                    type="text"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="endTime">Nível de gravidade</label>
-                  <select
-                    placeholder='hora de fim'
-                    className='form-field'
-                    id="endTime"
-                  >
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="endTime">Tempo estimado:</label>
-                  <select
-                    placeholder='hora de fim'
-                    className='form-field'
-                    id="endTime"
-                  >
-                  </select>
-                </div>
+      <h1>Algum Título</h1>
+      <div className="videoTag">
+        <video autoPlay loop muted>
+          <source src={med} type='video/mp4' />
+        </video>
+        <div className="aplication-1">
+          <form onSubmit={handleSubmit}>
+            <h2>Adicionar Intervalo</h2>
+            <div className='options'>
+              <label htmlFor="medName">Médico Responsável:</label>
+              <select
+                className='form-field'
+                id="medName"
+                name="medName"
+                value={medicoName}
+                onChange={(e) => setMedicoName(e.target.value)}
+              >
+                <option value="">Selecione um médico</option>
+                <option value="Meredith Grey">Meredith Grey</option>
+                <option value="Alex Karev">Alex Karev</option>
+                <option value="Miranda Bailey">Miranda Bailey</option>
+                <option value="Derek Shepherd">Derek Shepherd</option>
+                <option value="Cristina Yang">Cristina Yang</option>
+              </select>
             </div>
-            <div className="aplication-2">
-              <h2>Quadro de Cirurgias</h2>
-                
-                
-        
+            <div className='options'>
+              <label htmlFor="patientName">Nome do paciente:</label>
+              <input
+                className='form-field'
+                type="text"
+                id="patientName"
+                name="patientName"
+                value={patientName}
+                onChange={(e) => setPatientName(e.target.value)}
+              />
             </div>
+            {/* <div className='options'>
+              <label htmlFor="start">Início:</label>
+              <input
+                className='form-field'
+                type="text"
+                id="start"
+                name="start"
+              />
+            </div>
+            <div className='options'>
+              <label htmlFor="end">Fim:</label>
+              <input
+                className='form-field'
+                type="text"
+                id="end"
+                name="end"
+              />
+            </div> */}
+            <div className='options'>
+              <label htmlFor="start">Hora de início:</label>
+              <select
+                className='form-field'
+                id="start"
+                name="start"
+              >
+                {[...Array(24).keys()].map((hour) => (
+                  <option key={hour} value={hour}>{hour.toString().padStart(2, '0')}:00h</option>
+                ))}
+              </select>
+            </div>
+
+            <div className='options'>
+              <label htmlFor="end">Hora de fim:</label>
+              <select
+                className='form-field'
+                id="end"
+                name="end"
+              >
+                {[...Array(24).keys()].map((hour) => (
+                  <option key={hour} value={hour}>{hour.toString().padStart(2, '0')}:00h</option>
+                ))}
+              </select>
+            </div>
+            <div className='options'>
+              <label htmlFor="weight">Gravidade:</label>
+              <select
+                className='form-field'
+                id="weight"
+                name="weight"
+              >
+                {[...Array(11).keys()].map((value) => (
+                  <option key={value * 10} value={value * 10}>
+                    {value * 10}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* <div className='options'>
+              <label htmlFor="weight">Gravidade:</label>
+              <input
+                className='form-field'
+                type="text"
+                id="weight"
+                name="weight"
+              />
+            </div> */}
+            <button type="submit">Adicionar Intervalo</button>
+            <button onClick={runAlgorithm}>Executar Algoritmo</button>
+          </form>
+
+          {/* Exibição dos intervalos inseridos */}
+          <div>
+            <h2>Intervalos Inseridos: {medicoName} </h2>
+            <ul>
+              {userIntervals.map((interval, index) => (
+                <li key={index}>
+                  Início: {interval.start}, Fim: {interval.end}, Gravidade: {interval.weight}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
+        <div className="aplication-2">
+          <h2>Quadro de Cirurgias</h2>
+          <p>Selected Tasks:</p>
+          <ul>
+            {selectedTasks.map((task, index) => (
+              <li key={index}>
+                Médico: {task.medico},<br /> Paciente:{task.paciente},<br /> Início: {task.start}:00, Fim: {task.end}:00, Gravidade: {task.weight}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 };
 
