@@ -13,6 +13,7 @@
   height: 70%;
   z-index: 1;
   border-radius: 5px;
+  text-shadow: black 0.05em 0.05em 0.1em;
   background-color: rgba(26, 36, 131, 0.534);
   font-family: 'Roboto Condensed', sans-serif;
   color: #d2d0d0;
@@ -48,6 +49,7 @@
   background-color: rgba(26, 36, 131, 0.534);
   font-family: 'Roboto Condensed', sans-serif;
   color: #d2d0d0;
+  text-shadow: black 0.05em 0.05em 0.1em;
   border: 10px solid rgba(213, 211, 211, 0.699);
   overflow: hidden;
   max-width: 600px;
@@ -146,6 +148,7 @@ p {
   font-size: 25px;
   text-align: justify;
   font-weight: bold;
+  text-shadow: black 0.05em 0.05em 0.1em;
   padding: 20px;
 }
 h1 {
@@ -156,17 +159,18 @@ h1 {
   text-align: center;
   font-weight: bold;
   z-index: 1;
-  color: white;
+  color: rgb(216, 242, 255);
+  text-shadow: black 0.05em 0.05em 0.1em;
 }
 h2 {
   text-align: center;
   font-weight: bold;
-  color: #fff;
+  color: rgb(242, 250, 255);
 }
 h3 {
   text-align: left;
   font-weight: bold;
-  color: #fff;
+  color: rgb(242, 250, 255);
   margin-left: 4%;
   margin-top: 2%;
   margin-bottom: 2%;
@@ -176,7 +180,7 @@ label {
   font-size: 18px;
   margin: 4%;
   font-family: 'Roboto Condensed', sans-serif;
-  color: aliceblue;
+  color: rgb(242, 250, 255);
 }
 form {
   margin-top: 3%;
