@@ -44,7 +44,7 @@ const Dashboard = () => {
 
   return (
     <div className="container">
-      <h1>Agendamento Cirúrgico Inteligente</h1>
+      <h1>GreyMed Scheduler: Foco em Emergências</h1>
       <div className="videoTag">
         <video autoPlay loop muted>
           <source src={med} type='video/mp4' />
@@ -134,7 +134,7 @@ const Dashboard = () => {
           <button className='submit-button' onClick={runAlgorithm}>Verificar&nbsp;&gt;&gt;</button>
         </div>
         <div className="aplication-2">
-          <h2>Quadro de Cirurgias</h2>
+          <h2>Quadro de Atendimentos</h2>
           <div className='result-2'>
             <ul>
               {selectedTasks.map((task, index) => (
