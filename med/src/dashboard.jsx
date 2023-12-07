@@ -44,14 +44,13 @@ const Dashboard = () => {
 
   return (
     <div className="container">
-      <h1>Algum Título</h1>
+      <h1>Agendamento Cirúrgico Inteligente</h1>
       <div className="videoTag">
         <video autoPlay loop muted>
           <source src={med} type='video/mp4' />
         </video>
         <div className="aplication-1">
           <form onSubmit={handleSubmit}>
-            <h2>Adicionar Intervalo</h2>
             <div className='options'>
               <label htmlFor="medName">Médico Responsável:</label>
               <select
@@ -70,9 +69,10 @@ const Dashboard = () => {
               </select>
             </div>
             <div className='options'>
-              <label htmlFor="patientName">Nome do paciente:</label>
+              <label htmlFor="patientName">Paciente:</label>
               <input
-                className='form-field'
+                className='form-input'
+                placeholder='Nome do Paciente'
                 type="text"
                 id="patientName"
                 name="patientName"
@@ -80,24 +80,6 @@ const Dashboard = () => {
                 onChange={(e) => setPatientName(e.target.value)}
               />
             </div>
-            {/* <div className='options'>
-              <label htmlFor="start">Início:</label>
-              <input
-                className='form-field'
-                type="text"
-                id="start"
-                name="start"
-              />
-            </div>
-            <div className='options'>
-              <label htmlFor="end">Fim:</label>
-              <input
-                className='form-field'
-                type="text"
-                id="end"
-                name="end"
-              />
-            </div> */}
             <div className='options'>
               <label htmlFor="start">Hora de início:</label>
               <select
@@ -137,23 +119,10 @@ const Dashboard = () => {
                 ))}
               </select>
             </div>
-
-            {/* <div className='options'>
-              <label htmlFor="weight">Gravidade:</label>
-              <input
-                className='form-field'
-                type="text"
-                id="weight"
-                name="weight"
-              />
-            </div> */}
-            <button type="submit">Adicionar Intervalo</button>
-            <button onClick={runAlgorithm}>Executar Algoritmo</button>
+            <button className='add-button' type="submit">+ adicionar</button>
           </form>
-
-          {/* Exibição dos intervalos inseridos */}
-          <div>
-            <h2>Intervalos Inseridos: {medicoName} </h2>
+          <div className='result-1'>
+            <h3>Lista:</h3>
             <ul>
               {userIntervals.map((interval, index) => (
                 <li key={index}>
@@ -162,17 +131,19 @@ const Dashboard = () => {
               ))}
             </ul>
           </div>
+          <button className='submit-button' onClick={runAlgorithm}>Verificar&nbsp;&gt;&gt;</button>
         </div>
         <div className="aplication-2">
           <h2>Quadro de Cirurgias</h2>
-          <p>Selected Tasks:</p>
-          <ul>
-            {selectedTasks.map((task, index) => (
-              <li key={index}>
-                Médico: {task.medico},<br /> Paciente:{task.paciente},<br /> Início: {task.start}:00, Fim: {task.end}:00, Gravidade: {task.weight}
-              </li>
-            ))}
-          </ul>
+          <div className='result-2'>
+            <ul>
+              {selectedTasks.map((task, index) => (
+                <li key={index}>
+                  <b>Médico</b>: {task.medico} <br /> <b>Paciente:</b> {task.paciente},<br /> <b>Início: {task.start}:00&rarr;Fim: {task.end}:00&rarr;Gravidade: {task.weight}</b>
+                </li>
+              ))}
+            </ul>
+            </div>
         </div>
       </div>
     </div>
