@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style/dashboard.css';
 import med from './assets/blue_medical.mp4';
-import { intervalScheduling, find_Solution, tarefasPegadas} from './TaskList';
+import { WeightedIntervalScheduling, findSolution, tasksTaken } from './algorithm';
 
 const Dashboard = () => {
   const [userIntervals, setUserIntervals] = useState([]);
@@ -36,15 +36,16 @@ const Dashboard = () => {
   };
   const runAlgorithm = () => {
 
-    intervalScheduling(userIntervals);
-    find_Solution(userIntervals.length);
+    WeightedIntervalScheduling(userIntervals);
+    findSolution(userIntervals.length);
 
-    setSelectedTasks([...tarefasPegadas]);
+    setSelectedTasks([...tasksTaken]);
   };
 
   return (
     <div className="container">
-      <h1>GreyMed Scheduler: Foco em Emergências</h1>
+      <h1>GreyMed Scheduler<br></br></h1>
+      <h4 className='sub'>Foco em Emergências</h4>
       <div className="videoTag">
         <video autoPlay loop muted>
           <source src={med} type='video/mp4' />
@@ -119,19 +120,19 @@ const Dashboard = () => {
                 ))}
               </select>
             </div>
-            <button className='add-button' type="submit">+ adicionar</button>
+            <button className='add-button' type="submit">+ <a className='button-word'>adicionar</a></button>
           </form>
           <div className='result-1'>
             <h3>Lista:</h3>
             <ul>
               {userIntervals.map((interval, index) => (
                 <li key={index}>
-                  Início: {interval.start}, Fim: {interval.end}, Gravidade: {interval.weight}
+                  Início: {interval.start}&rarr;Fim: {interval.end}&rarr;Gravidade: {interval.weight}
                 </li>
               ))}
             </ul>
           </div>
-          <button className='submit-button' onClick={runAlgorithm}>Verificar&nbsp;&gt;&gt;</button>
+          <button className='submit-button' onClick={runAlgorithm}><a className='button-word'>verificar</a>&nbsp;&gt;&gt;</button>
         </div>
         <div className="aplication-2">
           <h2>Quadro de Atendimentos</h2>
@@ -139,7 +140,7 @@ const Dashboard = () => {
             <ul>
               {selectedTasks.map((task, index) => (
                 <li key={index}>
-                  <b>Médico</b>: {task.medico} <br /> <b>Paciente:</b> {task.paciente},<br /> <b>Início: {task.start}:00&rarr;Fim: {task.end}:00&rarr;Gravidade: {task.weight}</b>
+                  <b>Médico</b>: {task.medico} <br /> <b>Paciente:</b> {task.paciente}<br /> <b>Início: {task.start}:00&rarr;Fim: {task.end}:00&rarr;Gravidade: {task.weight} <br /> </b><br /> 
                 </li>
               ))}
             </ul>

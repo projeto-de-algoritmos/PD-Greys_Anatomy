@@ -69,7 +69,7 @@ export function ordenaHeap(intervals) {
 
 const M = [];
 
-export function intervalScheduling(intervals) {
+export function WeightedIntervalScheduling(intervals) {
   ordenaHeap(intervals);
 
   const n = intervals.length;
@@ -116,9 +116,9 @@ export function m_compute_opt(j) {
 }
 
 let indiceProxCompat;
-export let tarefasPegadas = [];
+export let tasksTaken = [];
 
-export function find_Solution(j) {
+export function findSolution(j) {
   let indiceHeap = j - 1;
 
   if (j === 0) {
@@ -127,9 +127,9 @@ export function find_Solution(j) {
   if (M[j] > M[j - 1]) {
     let resultP = p(j, indiceHeap, heapResultado);
     indiceProxCompat = M.indexOf(resultP);
-    tarefasPegadas.push(heapResultado[indiceHeap]);
-    return find_Solution(indiceProxCompat);
+    tasksTaken.push(heapResultado[indiceHeap]);
+    return findSolution(indiceProxCompat);
   }
-
+  
   return;
 }
