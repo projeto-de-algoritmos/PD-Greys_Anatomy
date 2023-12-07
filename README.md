@@ -24,19 +24,15 @@ No coração do sistema <b>GreyMed Scheduler: Foco em Emergências</b> está um 
 
 ## Screenshots
 
-A **Imagem 1** demonstra a funcionalidade do Greys Anatomy. 
+A **Imagem 1** demonstra o início do <b>GreyMed Scheduler: Foco em Emergências</b> nele contem campos a serem preenchidos. Na **Imagem 2** mostra o resultado.
 
 **Imagem 1 - inicio** 
 
-![img1]()
+![img1](med/src/assets/img1.png)
 
 **Imagem 2 - agendamento**
 
-![img2]()
-
-**Imagem 3 - exceção**
-
-![img3]()
+![img2](med/src/assets/img2.png)
 
 ## Instalação 
 **Linguagem**: JavaScript<br>
