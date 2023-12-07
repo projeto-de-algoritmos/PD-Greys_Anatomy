@@ -135,7 +135,7 @@ const Dashboard = () => {
           <button className='submit-button' onClick={runAlgorithm}><a className='button-word'>verificar</a>&nbsp;&gt;&gt;</button>
         </div>
         <div className="aplication-2">
-          <h2>Quadro de Atendimentos</h2>
+          <h2>Quadro de Cirurgias</h2>
           <div className='result-2'>
             <ul>
               {selectedTasks.map((task, index) => (
