@@ -28,11 +28,15 @@ A **Imagem 1** demonstra o início do <b>GreyMed Scheduler: Foco em Emergências
 
 **Imagem 1 - inicio** 
 
-![img1](med/src/assets/img1.png)
+![img1](med/src/assets/inicio.png)
 
 **Imagem 2 - agendamento**
 
-![img2](med/src/assets/img2.png)
+![img2](med/src/assets/add.png)
+
+**Imagem 2 - resultado**
+
+![img2](med/src/assets/resultado.png)
 
 ## Instalação 
 **Linguagem**: JavaScript<br>
