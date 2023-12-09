@@ -24,7 +24,7 @@ No coração do sistema <b>GreyMed Scheduler: Foco em Emergências</b> está um 
 
 ## Screenshots
 
-A **Imagem 1** demonstra o início do <b>GreyMed Scheduler: Foco em Emergências</b> nele contem campos a serem preenchidos. Na **Imagem 2** mostra o resultado.
+A **Imagem 1** demonstra o início do <b>GreyMed Scheduler: Foco em Emergências</b> nele contem campos a serem preenchidos. Na **Imagem 2** mostra o agendamento e na **Imagem 3** é o resultado.
 
 **Imagem 1 - inicio** 
 
@@ -34,7 +34,7 @@ A **Imagem 1** demonstra o início do <b>GreyMed Scheduler: Foco em Emergências
 
 ![img2](med/src/assets/add.png)
 
-**Imagem 2 - resultado**
+**Imagem 3 - resultado**
 
 ![img2](med/src/assets/resultado.png)
 
