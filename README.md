@@ -5,8 +5,8 @@
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| 20/0018442  |  Gabrielly Assunção Rodrigues |
-| 20/0023934|  Maria Eduarda Barbosa Santos |
+| 20/0018442 |  Gabrielly Assunção Rodrigues |
+| 20/0023934 |  Maria Eduarda Barbosa Santos |
 
 ### Apresentação
 
@@ -18,7 +18,7 @@
 Bem-vindo ao sistema <b>GreyMed Scheduler: Foco em Emergências</b>! Imagine-se imerso em uma plataforma com temática da série do Greys Anatomy, meticulosamente projetada para priorizar o cuidado mais urgente. Aqui, o algoritmo de Weighted Interval Scheduling é a espinha dorsal do atendimento médico, criando uma sinergia entre a arte da medicina e a precisão algorítmica. Cada paciente é cuidadosamente avaliado e classificado de acordo com a gravidade de sua condição, permitindo que os médicos se concentrem nos casos mais críticos. É como uma coreografia complexa, onde o tempo é maximizado e a vida é salva: uma dança entre a urgência e a precisão, garantindo que cada segundo seja dedicado a quem mais necessita.
 </p>
 <p align="justify">
-No coração do sistema <b>GreyMed Scheduler: Foco em Emergências</b> está um método de agendamento inovador. Cada tarefa é registrada no sistema com informações sobre o Médico, o Nome do paciente e a Gravidade, além do período. As tarefas podem ser atendimentos que variam entre cirurgias complexas e consultas cruciais. Logo em seguida, o algoritmo de Weighted Interval Scheduling entra em ação. Ele analisa a urgência do caso, permitindo uma alocação inteligente do tempo retornando os atendimentos de maior urgência e que tenham horários compatíveis!
+No coração do sistema <b>GreyMed Scheduler: Foco em Emergências</b> está um método de agendamento inovador. Cada cirurgia é registrada no sistema com informações sobre o Médico, o paciente e a Gravidade, além do período. Logo em seguida, o algoritmo de Weighted Interval Scheduling entra em ação. Ele analisa a urgência do caso, permitindo uma alocação inteligente do tempo retornando as cirurgias de maior urgência e que tenham horários compatíveis!
 </p>
 
 
@@ -58,7 +58,7 @@ A **Imagem 1** demonstra o início do <b>GreyMed Scheduler: Foco em Emergências
 ## Uso 
 
 <p align="justify">
-No <b>GreyMed Scheduler: Foco em Emergências</b>  cada tarefa é registrada no sistema com informações sobre o Médico Responsável, o Nome do paciente a Hora de início, Hora de fim da tarefa e a Gravidade. As tarefas podem ser cirurgias, consultas ou algo semelhante. O resultado são as tarefas mais urgentes a serem feitas. 
+No <b>GreyMed Scheduler: Foco em Emergências</b>  cada cirurgia é registrada no sistema com informações sobre o Médico Responsável, o Nome do paciente a Hora de início, Hora de fim da tarefa e a Gravidade. O resultado são as tarefas mais urgentes a serem realizadas pelos médicos responsáveis com as informações cadastradas. 
 </p>
 
 ## Outros
