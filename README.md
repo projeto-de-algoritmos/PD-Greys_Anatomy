@@ -5,8 +5,8 @@
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| 20/0018442  |  Gabrielly Assunção Rodrigues |
-| 20/0023934|  Maria Eduarda Barbosa Santos |
+| 20/0018442 |  Gabrielly Assunção Rodrigues |
+| 20/0023934 |  Maria Eduarda Barbosa Santos |
 
 ### Apresentação
 
@@ -32,7 +32,7 @@ No coração do sistema <b>GreyMed Scheduler</b> está um método de agendamento
 
 ![img2](med/src/assets/add.png)
 
-**Imagem 2 - resultado**
+**Imagem 3 - resultado**
 
 ![img2](med/src/assets/resultado.png)
 
